@@ -1,0 +1,120 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{getting-started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(environmentalhist)
+library(stars)
+```
+
+All come in stars format
+
+# Indices without a time component
+
+To load
+
+```{r}
+data("ramankuttyetal2002")
+```
+
+This will store the raster as a `stars` object named `ramankutty`.
+
+```{r}
+
+plot(ramankutty)
+```
+
+As you can see, these data come 
+
+
+```{r}
+sf::st_crs(ramankutty)
+```
+
+
+
+# Visualizing and using spatio-temporal data
+
+
+```{r}
+data("agrisuit_1500_2000")
+```
+
+
+```{r}
+sf::st_crs(suit1500200)
+```
+
+```{r}
+suit1500200
+```
+
+
+```{r}
+dim(suit1500200)
+```
+
+
+As per the vignette for `stars`, the subset operator `[` works as follows: 
+
+* its first argument selects attributes
+* second argument selects the first dimension
+* third argument selects the second dimension, etc
+
+```{r}
+suit1500200[ , , ,1] |> 
+  plot(main = "Agricultural Suitability in 1500")
+```
+
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+
+subset <- suit1500200[ , , ,c(1, 100, 200, 300)]
+plot(subset)
+
+ggplot() +
+  geom_stars(data = subset) +
+  facet_wrap("band") +
+  scale_fill_viridis_c(option = "magma", name = "suitability") +
+  coord_equal() +
+  theme_map() +
+  theme(legend.position = "bottom") +
+  theme(legend.key.width = unit(2, "cm"))
+```
+
+
+
+# Manipulating rasters
+
+
+
+```{r}
+sf::st_crop(ramankutty, sf::st_bbox(suit1500200)) |> 
+  plot(main = "Ramankutty et al. 2002 - Cropped to Europe")
+```
+
+
+# Transforming
+
+
+```{r}
+library(terra)
+ramankutty.terra <- as(ramankutty, "SpatRaster")
+plot(ramankutty.terra)
+
+```
+

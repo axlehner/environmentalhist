@@ -14,7 +14,7 @@
 #'
 #' }
 #' @source Ramankutty, Navin, Jonathan A. Foley, John Norman, and Kevin McSweeney. "The Global Distribution of Cultivable Lands: Current Patterns and Sensitivity to Possible Climate Change." Global Ecology and Biogeography 11, no. 5 (2002): 377-392. https://doi.org/10.1046/j.1466-822x.2002.00294.x.
-NULL
+"ramankutty"
 
 #' Lehner, Philippe (2024)
 #'
@@ -30,4 +30,4 @@ NULL
 #'   ...
 #' }
 #' @source Ramankutty, Navin, Jonathan A. Foley, John Norman, and Kevin McSweeney. "The Global Distribution of Cultivable Lands: Current Patterns and Sensitivity to Possible Climate Change." Global Ecology and Biogeography 11, no. 5 (2002): 377-392. https://doi.org/10.1046/j.1466-822x.2002.00294.x.
-NULL
+"suit1500200"
