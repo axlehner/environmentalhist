@@ -1,11 +1,10 @@
 Package: environmentalhist
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A Collection of Spatial Datasets from Environmental History
 Version: 0.1.0
 Authors@R: c(person("Alexander", "Lehner", email = "lehner@uchicago.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-5885-5966")),
              person("Dylan", "Philippe", email = "dylan.philippe@wyssacademy.org", role = c("aut"), comment = c(ORCID = "0009-0001-8567-0008")))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Stores small geospatial datasets to facilitate teaching and research.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

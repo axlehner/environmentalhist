@@ -4,16 +4,12 @@
 \name{ramankuttyetal2002}
 \alias{ramankuttyetal2002}
 \alias{ramankutty}
-\title{Ramankutty et al. (2002)}
+\title{Ramankutty et al. (2002) Index for Global Agricultural Suitability}
 \format{
 ##
-A raster, unprojected
+A raster formatted as a stars object, unprojected EPSG:4326 (WGS84).
 \describe{
-  \item{country}{Country name}
-  \item{iso2, iso3}{2 & 3 letter ISO country codes}
-  \item{year}{Year}
-  ...
-
+  \item{cellvalue}{Agricultural suitability between 0 and 1.}
 }
 }
 \source{
@@ -23,6 +19,15 @@ Ramankutty, Navin, Jonathan A. Foley, John Norman, and Kevin McSweeney. "The Glo
 ramankutty
 }
 \description{
-Agricultural suitability
+Agricultural suitability index scaled between 0 and 1.
+The dataset describes the fraction of each 0.5-degree grid cell occupied by cultivated land at a global level.
+}
+\examples{
+if (requireNamespace("stars", quietly = TRUE)) {
+  library(stars)
+  data("ramankuttyetal2002")
+
+  plot(ramankutty)
+ }
 }
 \keyword{datasets}

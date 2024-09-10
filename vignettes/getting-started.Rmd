@@ -16,27 +16,26 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(environmentalhist)
-library(stars)
+library(stars); library(sf)
 ```
 
-All come in stars format
+All raster data included has been stored as `stars` objects. See [this discussion on Github](https://github.com/r-spatial/stars/issues/633#issuecomment-1597356513) by Edzer Pebesma on the advantages and disadvantages of `stars` versus `terra` (the successor of `raster`) when it comes to working with raster data in R.
 
 # Indices without a time component
 
-To load
+To load the Ramankutty et al. (2002) index for agricultural suitability, simply type:
 
 ```{r}
 data("ramankuttyetal2002")
 ```
 
-This will store the raster as a `stars` object named `ramankutty`.
+This will store the raster as a `stars` object named `ramankutty` in your environment. It can be visualized by using the plot function:
 
 ```{r}
-
 plot(ramankutty)
 ```
 
-As you can see, these data come 
+As you can see, these data come unprojected and the x-coordinates refer to degrees longitude and the y-coordinates to degrees latitude. The resolution is 0.5 degree and each cell value ranges between 0 and 1.
 
 
 ```{r}
@@ -47,37 +46,39 @@ sf::st_crs(ramankutty)
 
 # Visualizing and using spatio-temporal data
 
+To load the spatio-temporal index by Lehner, Philippe (2024) type:
 
 ```{r}
 data("agrisuit_1500_2000")
 ```
 
+The data come unprojected in EPSG:4326 with a WGS84 datum:
 
 ```{r}
 sf::st_crs(suit1500200)
 ```
 
-```{r}
-suit1500200
-```
-
+Each band of the raster refers to one year, starting from 1500:
 
 ```{r}
 dim(suit1500200)
 ```
 
 
-As per the vignette for `stars`, the subset operator `[` works as follows: 
+We can easily visualize every year separately. As per the vignette for `stars`, the subset operator `[` works as follows: 
 
 * its first argument selects attributes
 * second argument selects the first dimension
 * third argument selects the second dimension, etc
+
+To access the first year, we thus type:
 
 ```{r}
 suit1500200[ , , ,1] |> 
   plot(main = "Agricultural Suitability in 1500")
 ```
 
+We can visualize the temporal nature of the index using `ggplot2`:
 
 ```{r}
 library(ggplot2)
@@ -97,10 +98,9 @@ ggplot() +
 ```
 
 
-
 # Manipulating rasters
 
-
+For working with rasters, check the vignette of the `stars` package. We can cut, crop, or reproject the data as we please. As an example, we cut the global index to the bounding box of Europe:
 
 ```{r}
 sf::st_crop(ramankutty, sf::st_bbox(suit1500200)) |> 
@@ -110,6 +110,7 @@ sf::st_crop(ramankutty, sf::st_bbox(suit1500200)) |>
 
 # Transforming
 
+You can of course also convert them to `terra` format if you don't feel comfortable working with `stars`:
 
 ```{r}
 library(terra)
