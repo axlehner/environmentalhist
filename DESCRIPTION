@@ -19,7 +19,7 @@ Suggests:
     ggthemes
 Config/testthat/edition: 3
 RoxygenNote: 7.2.3
-URL: https://axlehner.github.io/environmentalhist/
+URL: https://github.com/axlehner/environmentalhist
 BugReports: https://github.com/axlehner/environmentalhist/issues
 Depends: 
     R (>= 2.10)
